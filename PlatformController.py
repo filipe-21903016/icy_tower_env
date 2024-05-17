@@ -1,8 +1,7 @@
-import pygame
 import math
-from random import randrange, random, getrandbits
+from random import randrange, getrandbits
 from Platform import Platform
-from Constants import SCREEN_WIDTH, SCREEN_HEIGHT, JUMP_VELOCITY, MAX_JUMP
+from Constants import SCREEN_WIDTH, MAX_JUMP
 
 
 class PlatformController:

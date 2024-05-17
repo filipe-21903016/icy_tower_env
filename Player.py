@@ -18,52 +18,57 @@ class Player:
     color = (255, 0, 0)
     speed = 5
 
-    def __init__(self):
+    render: bool
+
+    def __init__(self, render=True):
         self.x = 30
         self.y = SCREEN_HEIGHT - FLOOR_HEIGHT - self.height
         self.score = -10  # negate floor platform
 
-        self.spritesheet_image = load_image("spritesheet.png")
-        self.spritesheet = []
+        self.render = render
 
-        # Idle
-        self.cropped = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped.blit(self.spritesheet_image, (0, 0), (0, 0, 33, 57))
-        self.cropped2 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped2.blit(self.spritesheet_image, (0, 0), (37, 0, 33, 57))
-        self.cropped3 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped3.blit(self.spritesheet_image, (0, 0), (75, 0, 33, 57))
-        self.spritesheet.append(self.cropped)
-        self.spritesheet.append(self.cropped2)
-        self.spritesheet.append(self.cropped3)
+        if self.render:
+            self.spritesheet_image = load_image("spritesheet.png")
+            self.spritesheet = []
 
-        # Going right
-        self.cropped4 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped4.blit(self.spritesheet_image, (0, 0), (0, 56, 33, 57))
-        self.cropped5 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped5.blit(self.spritesheet_image, (0, 0), (37, 56, 33, 57))
-        self.cropped6 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped6.blit(self.spritesheet_image, (0, 0), (75, 56, 33, 57))
-        self.spritesheet.append(self.cropped4)
-        self.spritesheet.append(self.cropped5)
-        self.spritesheet.append(self.cropped6)
+            # Idle
+            self.cropped = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped.blit(self.spritesheet_image, (0, 0), (0, 0, 33, 57))
+            self.cropped2 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped2.blit(self.spritesheet_image, (0, 0), (37, 0, 33, 57))
+            self.cropped3 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped3.blit(self.spritesheet_image, (0, 0), (75, 0, 33, 57))
+            self.spritesheet.append(self.cropped)
+            self.spritesheet.append(self.cropped2)
+            self.spritesheet.append(self.cropped3)
 
-        # Going left
-        self.spritesheet.append(pygame.transform.flip(self.cropped4, True, False))
-        self.spritesheet.append(pygame.transform.flip(self.cropped5, True, False))
-        self.spritesheet.append(pygame.transform.flip(self.cropped6, True, False))
+            # Going right
+            self.cropped4 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped4.blit(self.spritesheet_image, (0, 0), (0, 56, 33, 57))
+            self.cropped5 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped5.blit(self.spritesheet_image, (0, 0), (37, 56, 33, 57))
+            self.cropped6 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped6.blit(self.spritesheet_image, (0, 0), (75, 56, 33, 57))
+            self.spritesheet.append(self.cropped4)
+            self.spritesheet.append(self.cropped5)
+            self.spritesheet.append(self.cropped6)
 
-        # Jumping
-        self.cropped7 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
-        self.cropped7.blit(self.spritesheet_image, (0, 0), (75, 112, 33, 57))
-        self.spritesheet.append(self.cropped7)
-        self.spritesheet.append(self.cropped7)
-        self.spritesheet.append(self.cropped7)
+            # Going left
+            self.spritesheet.append(pygame.transform.flip(self.cropped4, True, False))
+            self.spritesheet.append(pygame.transform.flip(self.cropped5, True, False))
+            self.spritesheet.append(pygame.transform.flip(self.cropped6, True, False))
 
-        self.sprite_index_x = 0
-        self.sprite_index_y = 0
-        self.frame_counter = 0
-        self.frame_delay = 9
+            # Jumping
+            self.cropped7 = pygame.Surface((33, 57), pygame.SRCALPHA, 32)
+            self.cropped7.blit(self.spritesheet_image, (0, 0), (75, 112, 33, 57))
+            self.spritesheet.append(self.cropped7)
+            self.spritesheet.append(self.cropped7)
+            self.spritesheet.append(self.cropped7)
+
+            self.sprite_index_x = 0
+            self.sprite_index_y = 0
+            self.frame_counter = 0
+            self.frame_delay = 9
 
     def draw(self, game_display, camera):
         game_display.blit(
