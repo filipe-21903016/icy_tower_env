@@ -7,7 +7,7 @@ from Constants import *
 from Platform import Platform
 from PlatformController import PlatformController
 from Player import Player
-from Utils import load_image
+from Utils import load_image, message_display
 import logging
 
 logger = logging.getLogger(__name__)
@@ -145,6 +145,9 @@ class IcyTowerEnv:
             self.floor.draw(self.game_display, self.camera)
             self.platform_controller.draw(self.game_display, self.camera)
             self.agent.draw(self.game_display, self.camera)
+            message_display(
+                self.game_display, str(self.agent.score), 25, 30, 36, (255, 255, 255)
+            )
             pygame.display.update()
             self.clock.tick(self.fps)
 
