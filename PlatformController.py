@@ -4,8 +4,6 @@ from random import randrange, random, getrandbits
 from Platform import Platform
 from Constants import SCREEN_WIDTH, SCREEN_HEIGHT, JUMP_VELOCITY, MAX_JUMP
 
-pygame.init()
-
 
 class PlatformController:
     def __init__(self):

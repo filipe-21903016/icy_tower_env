@@ -1,5 +1,5 @@
 import pygame
-from Constants import GRAVITY, SCREEN_WIDTH, SCREEN_HEIGHT
+from Constants import FLOOR_HEIGHT, GRAVITY, SCREEN_WIDTH, SCREEN_HEIGHT
 from Utils import load_image
 from copy import deepcopy
 
@@ -20,7 +20,7 @@ class Player:
 
     def __init__(self):
         self.x = 30
-        self.y = 500
+        self.y = SCREEN_HEIGHT - FLOOR_HEIGHT - self.height
         self.score = -10  # negate floor platform
 
         self.spritesheet_image = load_image("spritesheet.png")

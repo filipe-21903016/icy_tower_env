@@ -1,5 +1,7 @@
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+FLOOR_HEIGHT = 36
+FLOOR_WIDTH = SCREEN_WIDTH
 res = (SCREEN_WIDTH, SCREEN_HEIGHT)
 JUMP_VELOCITY = 15
 MAX_JUMP = 150
@@ -12,7 +14,7 @@ ARROW_HALF_WIDTH = 43  # px
 
 GRAVITY = 1
 
-GAME_CAPTION = 'Icy Tower Clone'
+GAME_CAPTION = "Icy Tower Clone"
 
 ICE_RESISTANCE = 0.1
 
@@ -24,5 +26,5 @@ ABOUT_MESSAGE = [
     "Pygame skills and",
     "participating in the",
     "Hack Together hackathon",
-    "organized by Strypes"
+    "organized by Strypes",
 ]

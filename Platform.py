@@ -9,7 +9,13 @@ from copy import deepcopy
 class Platform:
     color = (255, 100, 100)
 
-    def __init__(self, x, y, width, height):
+    def __init__(
+        self,
+        x,
+        y,
+        width,
+        height,
+    ):
         self.x = x
         self.y = y
         self.height = height
