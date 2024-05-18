@@ -27,7 +27,9 @@ def message_display(
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join("assets", name)
+    current_file_path = os.path.abspath(__file__)
+    current_directory = os.path.dirname(current_file_path)
+    fullname = os.path.join(current_directory, "assets", name)
     try:
         image = pygame.image.load(fullname)
     except pygame.error as message:
