@@ -4,7 +4,7 @@ import pygame
 
 def main():
     pygame.init()
-    env = IcyTowerEnv(True)
+    env = IcyTowerEnv(render=True, easy=True)
     while True:
         state = None
         reward = 0

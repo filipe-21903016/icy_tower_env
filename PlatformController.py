@@ -5,16 +5,19 @@ from Constants import SCREEN_WIDTH, MAX_JUMP
 
 
 class PlatformController:
-    def __init__(self):
+    def __init__(self, easy=False):
         self.platform_set = []
         self.index = 10
         self.last_x = MAX_JUMP
         self.score = 0
+        self.easy = easy
         for i in range(0, self.index):
             self.platform_set.append(self.generate_platform(i, self.score))
 
     def generate_platform(self, index, score):
-        if score < MAX_JUMP * MAX_JUMP:
+        if self.easy:
+            change = 0
+        elif score < MAX_JUMP * MAX_JUMP:
             change = int(math.sqrt(score))
         else:
             change = MAX_JUMP - 1

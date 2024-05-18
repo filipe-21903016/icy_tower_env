@@ -33,18 +33,20 @@ class IcyTowerEnv:
     steps: List[int]
     action_space: List[int] = [0, 1, 2, 3]
     action_space_size = len(action_space)
+    easy: bool
 
-    def __init__(self, render=True):
+    def __init__(self, render=True, easy=False):
         if render:
             pygame.init()
             self.game_display = pygame.display.set_mode(res)
             self.clock = pygame.time.Clock()
             self.background = load_image("background.jpg")
 
+        self.easy = easy
         self.render = render
         self.agent = Player(render)
-        self.camera = Camera(self.agent)
-        self.platform_controller = PlatformController()
+        self.camera = Camera(self.agent, easy)
+        self.platform_controller = PlatformController(easy=easy)
         self.floor = Platform(0, SCREEN_HEIGHT - 36, SCREEN_WIDTH, 36)
         self.done = False
         self.fps = 60
@@ -89,11 +91,11 @@ class IcyTowerEnv:
 
     def reset(self):
         self.agent = Player(self.render)
-        self.platform_controller = PlatformController()
+        self.platform_controller = PlatformController(easy=self.easy)
         self.floor = Platform(
             0, SCREEN_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT
         )
-        self.camera = Camera(self.agent)
+        self.camera = Camera(self.agent, self.easy)
         self.done = False
 
     def _move_left(self):
