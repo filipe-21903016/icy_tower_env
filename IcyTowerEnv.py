@@ -11,7 +11,7 @@ from Utils import load_image, message_display
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(logging.StreamHandler())
 logger.addHandler(logging.FileHandler("log.txt"))
 
@@ -32,7 +32,8 @@ class IcyTowerEnv:
     done: bool
     steps: List[int]
     action_space: List[int] = [0, 1, 2, 3]
-    action_space_size = len(action_space)
+    action_size = len(action_space)
+    state_size = 9
     easy: bool
 
     def __init__(self, render=True, easy=False):
@@ -75,7 +76,10 @@ class IcyTowerEnv:
 
         self._update()
 
-        reward = self.agent.score - prev_score
+        state = self.get_state()
+
+        reward = self.agent.score - prev_score if not self.done else -100
+        logger.debug(f"STATE: {', '.join(map(str, state))}")
         logger.debug(f"REWARD: {reward}")
         logger.debug(f"SCORE: {self.agent.score}")
 
@@ -86,8 +90,26 @@ class IcyTowerEnv:
         return state, reward, self.done, info
 
     def get_state(self):
-        # TODO: Implement
-        pass
+        agent_x, agent_y = self.agent.x, self.agent.y
+        agent_vx, agent_vy = self.agent.vel_x, self.agent.vel_y
+        nearest_platforms = self.platform_controller.get_nearest_platforms(
+            self.agent, 2
+        )
+        on_platform = self.agent.on_any_platform(self.platform_controller, self.floor)
+
+        state = [
+            agent_x,
+            agent_y,
+            agent_vx,
+            agent_vy,
+            on_platform and 1 or 0,
+            nearest_platforms[0].x,
+            nearest_platforms[0].y,
+            nearest_platforms[1].x,
+            nearest_platforms[1].y,
+        ]
+
+        return state
 
     def reset(self):
         self.agent = Player(self.render)

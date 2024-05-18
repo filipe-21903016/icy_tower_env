@@ -50,3 +50,12 @@ class PlatformController:
             for i in range(self.index, self.index + 10):
                 self.platform_set.append(self.generate_platform(i, self.score))
             self.index += 10
+
+    def get_nearest_platforms(self, player, num_platforms):
+        n = min(num_platforms, len(self.platform_set))
+        platforms = sorted(
+            [p for p in self.platform_set if p.y < player.y],
+            key=lambda p: p.y,
+            reverse=True,
+        )
+        return platforms[:n]
